@@ -81,7 +81,6 @@ router.get("/", function(req, res) {
   taskDb
     .find({})
     .then(function(docs) {
-      let curDate = new Date();
       res.json({ tasks: docs });
     })
     .catch(function(err) {

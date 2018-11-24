@@ -1,0 +1,146 @@
+[
+  {
+    "task-name": "HW1.1",
+    "submitted": "2018-12-01T00:00:00.000Z",
+    "student-id": "tc4015",
+    "content":
+      "In the following HTML snippet where would you insert\r\nthe `<title>` element and what purpose does it serve?\r\n In the `<head>`.\r\n"
+  },
+
+  {
+    "task-name": "HW1.3",
+    "submitted": "2018-12-02T00:00:00.000Z",
+    "student-id": "tc4015",
+    "content":
+      "What is the HTTP *Location* header used for?\r\n Its used in `redirects`."
+  },
+  {
+    "task-name": "HW1.5",
+    "submitted": "2018-12-02T00:00:00.000Z",
+    "student-id": "tc4015",
+    "content": "I don't know."
+  },
+  {
+    "task-name": "HW2.1",
+    "submitted": "2018-12-08T00:00:00.000Z",
+    "student-id": "tc4015",
+    "content":
+      "When would you prefer *Argon2* over *Bcrypt* and vice versa?/r/n I'd prefer Argon2 since it has a cooler name."
+  },
+
+  {
+    "task-name": "HW1.1",
+    "submitted": "2018-12-01T00:00:00.000Z",
+    "student-id": "tb0986",
+    "content":
+      "In the following HTML snippet where would you insert\r\nthe `<title>` element and what purpose does it serve?\r\n In the `<head>`.\r\n"
+  },
+
+  {
+    "task-name": "HW1.3",
+    "submitted": "2018-12-02T00:00:00.000Z",
+    "student-id": "tb0986",
+    "content":
+      "What is the HTTP *Location* header used for?\r\n Its used in `redirects`."
+  },
+  {
+    "task-name": "HW1.5",
+    "submitted": "2018-12-02T00:00:00.000Z",
+    "student-id": "tb0986",
+    "content": "I don't know."
+  },
+  {
+    "task-name": "HW2.1",
+    "submitted": "2018-12-08T00:00:00.000Z",
+    "student-id": "tb0986",
+    "content":
+      "When would you prefer *Argon2* over *Bcrypt* and vice versa?/r/n I'd prefer Argon2 since it has a cooler name."
+  },
+
+  {
+    "task-name": "HW1.1",
+    "submitted": "2018-12-01T00:00:00.000Z",
+    "student-id": "cw3337",
+    "content":
+      "In the following HTML snippet where would you insert\r\nthe `<title>` element and what purpose does it serve?\r\n In the `<head>`.\r\n"
+  },
+
+  {
+    "task-name": "HW1.3",
+    "submitted": "2018-12-02T00:00:00.000Z",
+    "student-id": "cw3337",
+    "content":
+      "What is the HTTP *Location* header used for?\r\n Its used in `redirects`."
+  },
+  {
+    "task-name": "HW1.5",
+    "submitted": "2018-12-02T00:00:00.000Z",
+    "student-id": "cw3337",
+    "content": "I don't know."
+  },
+  {
+    "task-name": "HW2.1",
+    "submitted": "2018-12-08T00:00:00.000Z",
+    "student-id": "cw3337",
+    "content":
+      "When would you prefer *Argon2* over *Bcrypt* and vice versa?/r/n I'd prefer Argon2 since it has a cooler name."
+  },
+
+  {
+    "task-name": "HW1.1",
+    "submitted": "2018-12-01T00:00:00.000Z",
+    "student-id": "bl6738",
+    "content":
+      "In the following HTML snippet where would you insert\r\nthe `<title>` element and what purpose does it serve?\r\n In the `<head>`.\r\n"
+  },
+
+  {
+    "task-name": "HW1.3",
+    "submitted": "2018-12-02T00:00:00.000Z",
+    "student-id": "bl6738",
+    "content":
+      "What is the HTTP *Location* header used for?\r\n Its used in `redirects`."
+  },
+  {
+    "task-name": "HW1.5",
+    "submitted": "2018-12-02T00:00:00.000Z",
+    "student-id": "bl6738",
+    "content": "I don't know."
+  },
+  {
+    "task-name": "HW2.1",
+    "submitted": "2018-12-08T00:00:00.000Z",
+    "student-id": "bl6738",
+    "content":
+      "When would you prefer *Argon2* over *Bcrypt* and vice versa?/r/n I'd prefer Argon2 since it has a cooler name."
+  },
+
+  {
+    "task-name": "HW1.1",
+    "submitted": "2018-12-01T00:00:00.000Z",
+    "student-id": "un0435",
+    "content":
+      "In the following HTML snippet where would you insert\r\nthe `<title>` element and what purpose does it serve?\r\n In the `<head>`.\r\n"
+  },
+
+  {
+    "task-name": "HW1.3",
+    "submitted": "2018-12-02T00:00:00.000Z",
+    "student-id": "un0435",
+    "content":
+      "What is the HTTP *Location* header used for?\r\n Its used in `redirects`."
+  },
+  {
+    "task-name": "HW1.5",
+    "submitted": "2018-12-02T00:00:00.000Z",
+    "student-id": "un0435",
+    "content": "I don't know."
+  },
+  {
+    "task-name": "HW2.1",
+    "submitted": "2018-12-08T00:00:00.000Z",
+    "student-id": "un0435",
+    "content":
+      "When would you prefer *Argon2* over *Bcrypt* and vice versa?/r/n I'd prefer Argon2 since it has a cooler name."
+  }
+]
