@@ -121,13 +121,54 @@ describe("taskRoutes", function() {
         .expect(200, done);
     });
 
-        it("Try to delete a task that exists anymore: HW3.1", function(done) {
+    it("Try to delete a task that exists anymore: HW3.1", function(done) {
       request(app)
         .delete("/tasks/HW3.1/")
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
         .expect(function(res) {
           //console.log(res.body);
+          assert.exists(res.body.error);
+        })
+        .expect(404, done);
+    });
+  });
+
+  describe("Put /tasks", function() {
+    it("Update a task that exists: HW2.1", function(done) {
+      let atask = {
+        "task-name": "HW2.1",
+        due: "2018-12-08T00:00:00.000Z",
+        status: "open", // Originally closed
+        instructions:
+          "When would you prefer *Argon2* over *Bcrypt* and vice versa?"
+      };
+      request(app)
+        .put("/tasks/HW2.1/")
+        .set("Accept", "application/json")
+        .send(atask)
+        .expect("Content-Type", /json/)
+        .expect(function(res) {
+          // console.log(res.body);
+          assert.include(res.body, atask);
+        })
+        .expect(200, done);
+    });
+
+    it("Try to update a non-existant task: HW6.1", function(done) {
+      let atask = {
+        "task-name": "HW6.1",
+        due: "2018-12-12T00:00:00.000Z",
+        status: "open", // Originally closed
+        instructions: "Why use HTML5?"
+      };
+      request(app)
+        .put("/tasks/HW6.1/")
+        .set("Accept", "application/json")
+        .send(atask)
+        .expect("Content-Type", /json/)
+        .expect(function(res) {
+          // console.log(res.body);
           assert.exists(res.body.error);
         })
         .expect(404, done);

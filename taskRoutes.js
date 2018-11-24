@@ -125,8 +125,28 @@ router.delete("/:taskName", function(req, res) {
 });
 
 // Put a specific task
-router.put("/:taskId", function(req, res) {
-  // TODO
+router.put("/:taskName", function(req, res) {
+  let taskName = req.params.taskName;
+  let taskInfo = req.body;
+  let [error, message] = validateTask(taskInfo);
+  if (error) {
+    res.status(400).json({ error: message });
+    return;
+  }
+  if (taskName !== taskInfo["task-name"]) {
+    res.status(400).json({ error: "task-name and path don't match" });
+    return;
+  }
+  taskDb
+    .update({ "task-name": taskName }, taskInfo, { returnUpdatedDocs: true })
+    .then(function(doc) {
+      if (doc) {
+        // console.log(doc);
+        res.status(200).json(doc);
+      } else {
+        res.status(404).json({ error: "Task not found"});
+      }
+    });
 });
 
 module.exports = router;
