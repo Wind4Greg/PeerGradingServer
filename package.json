@@ -1,0 +1,21 @@
+{
+  "name": "prserver",
+  "version": "0.0.1",
+  "description": "The server side of an assignment submission and peer review system.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Dr. Greg M. Bernstein",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nedb": "^1.8.0",
+    "nedb-promises": "^3.0.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
+  }
+}
