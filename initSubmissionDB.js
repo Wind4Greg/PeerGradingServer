@@ -1,15 +1,6 @@
-// Create a NeDB datastore for tasks created by a *teacher*.
-//
-// Remove the file taskDB before running this example
-//
-// const DataStore = require("nedb-promises");
-// console.log("In init sub database");
-// const db = DataStore.create({
-//   filename: __dirname + "/submissionDB",
-//   autoload: true
-// });
-// db.ensureIndex({ fieldName: "task-name", unique: false });
-// db.ensureIndex({ fieldName: "student-id", unique: false });
+/*
+    Create a NeDB datastore for tasks created by a *teacher*.
+*/
 const db = require("./submissionModel");
 
 const submissions = require("./submissions1.json");

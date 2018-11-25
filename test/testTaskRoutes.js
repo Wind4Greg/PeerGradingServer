@@ -1,4 +1,4 @@
-// Mocha test example
+// Test the "task", i.e., assignment related routes
 const request = require("supertest");
 const assert = require("chai").assert;
 const resetTasks = require("../initTaskDB");

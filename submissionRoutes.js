@@ -8,13 +8,8 @@ const router = express.Router();
 router.use(express.json());
 
 const submissionDb = require("./submissionModel");
-
 // We need the task database to validate submissions.
-const taskDb = new Datastore({
-  filename: __dirname + "/taskDB",
-  autoload: true
-});
-taskDb.ensureIndex({ fieldName: "task-name", unique: true });
+const taskDb = require("./taskModel");
 
 function validateSubmission(subInfo) {
   const allowedFields = ["task-name", "student-id", "content"];
@@ -130,7 +125,7 @@ router.put("/:taskName/student/:studentID", function(req, res) {
   let submissionInfo = req.body;
   submissionInfo["task-name"] = taskName;
   submissionInfo["student-id"] = studentID;
-  submissionInfo.submitted = (new Date()).toJSON();
+  submissionInfo.submitted = new Date().toJSON();
 
   validateSubmission(submissionInfo).then(function(errMessage) {
     let [error, message] = errMessage;
@@ -144,8 +139,11 @@ router.put("/:taskName/student/:studentID", function(req, res) {
     }
     // Uses an "upsert", i.e., allows both update and insert.
     submissionDb
-      .update({ "task-name": taskName, "student-id": studentID }, submissionInfo,
-        { returnUpdatedDocs: true, upsert: true })
+      .update(
+        { "task-name": taskName, "student-id": studentID },
+        submissionInfo,
+        { returnUpdatedDocs: true, upsert: true }
+      )
       .then(function(doc) {
         if (doc) {
           console.log(doc);

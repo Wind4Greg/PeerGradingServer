@@ -1,19 +1,16 @@
-// Create a NeDB datastore for tasks created by a *teacher*.
-//
-// Remove the file taskDB before running this example
-//
-// const DataStore = require("nedb-promises");
-// const db = new DataStore({ filename: __dirname + "/taskDB", autoload: true });
-// db.ensureIndex({ fieldName: "task-name", unique: true });
+/*  Create a NeDB datastore for tasks created by a *teacher*
+    for use in testing.
+*/
+
 const db = require("./taskModel");
 const tasks = require("./tasks1.json");
-// We let NeDB create _id property for us.
 
 function resetTasks() {
-  return db.remove({}, { multi: true })
+  return db
+    .remove({}, { multi: true })
     .then(function(numRemoved) {
       // console.log(`Removed ${numRemoved} tasks`);
-      let p = db.insert(tasks);
+      let p = db.insert(tasks); // We let NeDB create _id property for us.
       // console.log(p instanceof Promise);
       return p;
     })

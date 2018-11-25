@@ -7,13 +7,9 @@ const express = require("express");
 const router = express.Router();
 router.use(express.json());
 
-// const taskDb = new Datastore({
-//   filename: __dirname + "/taskDB",
-//   autoload: true
-// });
-// taskDb.ensureIndex({ fieldName: "task-name", unique: true });
 const taskDb = require("./taskModel");
 
+// You can add more task validations in this function.
 function validateTask(taskInfo) {
   const allowedFields = ["task-name", "due", "status", "instructions"];
   let error = false;
@@ -37,6 +33,7 @@ function validateTask(taskInfo) {
   return [error, message];
 }
 
+// Used to create new tasks
 router.post("/", function(req, res) {
   let taskInfo = req.body; // This should be a JS Object
   let [error, message] = validateTask(taskInfo);
@@ -44,7 +41,6 @@ router.post("/", function(req, res) {
     res.status(400).json({ error: message });
     return;
   }
-  // TODO: Check for other required fields
   taskDb
     .find({ "task-name": taskInfo["task-name"] }) // task name already used?
     .then(function(docs) {
@@ -124,7 +120,7 @@ router.delete("/:taskName", function(req, res) {
     });
 });
 
-// Put a specific task
+// Used to update a task
 router.put("/:taskName", function(req, res) {
   let taskName = req.params.taskName;
   let taskInfo = req.body;
@@ -144,7 +140,7 @@ router.put("/:taskName", function(req, res) {
         // console.log(doc);
         res.status(200).json(doc);
       } else {
-        res.status(404).json({ error: "Task not found"});
+        res.status(404).json({ error: "Task not found" });
       }
     });
 });
