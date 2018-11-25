@@ -4,10 +4,12 @@
    We just need one!
 
  */
+const path = require("path");
 const Datastore = require("nedb-promises");
+const dbFile = path.join(__dirname, '../', 'submissionDB')
 
 const submissionDb = Datastore.create({
-  filename: __dirname + "/submissionDB",
+  filename: dbFile,
   autoload: true
 });
 submissionDb .ensureIndex({ fieldName: "task-name", unique: false });

@@ -9,6 +9,7 @@
   "author": "Dr. Greg M. Bernstein",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "express": "^4.16.4",
     "nedb": "^1.8.0",
     "nedb-promises": "^3.0.2"

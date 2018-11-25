@@ -2,7 +2,7 @@
     for use in testing.
 */
 
-const db = require("./taskModel");
+const db = require("../models/taskModel");
 const tasks = require("./tasks1.json");
 
 function resetTasks() {

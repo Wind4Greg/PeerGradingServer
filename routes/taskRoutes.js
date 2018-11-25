@@ -7,7 +7,7 @@ const express = require("express");
 const router = express.Router();
 router.use(express.json());
 
-const taskDb = require("./taskModel");
+const taskDb = require("../models/taskModel");
 
 // You can add more task validations in this function.
 function validateTask(taskInfo) {

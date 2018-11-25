@@ -1,7 +1,7 @@
 /*
     Create a NeDB datastore for tasks created by a *teacher*.
 */
-const db = require("./submissionModel");
+const db = require("../models/submissionModel");
 
 const submissions = require("./submissions1.json");
 

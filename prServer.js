@@ -3,9 +3,11 @@
  */
 const express = require("express");
 const app = express();
-const taskRoutes = require('./taskRoutes');
+const taskRoutes = require('./routes/taskRoutes');
+const submissionRoutes = require('./routes/submissionRoutes');
 
 app.use('/tasks',taskRoutes);
+app.use('/submissions', submissionRoutes);
 
 const host = '127.0.1.10';
 const port = '5555';

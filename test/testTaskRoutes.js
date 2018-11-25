@@ -1,10 +1,10 @@
 // Test the "task", i.e., assignment related routes
 const request = require("supertest");
 const assert = require("chai").assert;
-const resetTasks = require("../initTaskDB");
+const resetTasks = require("../testHelpers/initTaskDB");
 const express = require("express");
 const app = express();
-const taskRoutes = require("../taskRoutes");
+const taskRoutes = require("../routes/taskRoutes");
 
 app.use("/tasks", taskRoutes);
 

@@ -1,10 +1,10 @@
 // Mocha test example
 const request = require("supertest");
 const assert = require("chai").assert;
-const resetSubmissions = require("../initSubmissionDB");
+const resetSubmissions = require("../testHelpers/initSubmissionDB");
 const express = require("express");
 const app = express();
-const submissionRoutes = require("../submissionRoutes");
+const submissionRoutes = require("../routes/submissionRoutes");
 
 app.use("/submissions", submissionRoutes);
 

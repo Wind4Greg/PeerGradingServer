@@ -7,9 +7,9 @@ const Datastore = require("nedb-promises");
 const router = express.Router();
 router.use(express.json());
 
-const submissionDb = require("./submissionModel");
+const submissionDb = require("../models/submissionModel");
 // We need the task database to validate submissions.
-const taskDb = require("./taskModel");
+const taskDb = require("../models/taskModel");
 
 function validateSubmission(subInfo) {
   const allowedFields = ["task-name", "student-id", "content"];
