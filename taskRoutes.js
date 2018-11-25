@@ -3,15 +3,16 @@
  */
 
 const express = require("express");
-const Datastore = require("nedb-promises");
+// const Datastore = require("nedb-promises");
 const router = express.Router();
 router.use(express.json());
 
-const taskDb = new Datastore({
-  filename: __dirname + "/taskDB",
-  autoload: true
-});
-taskDb.ensureIndex({ fieldName: "task-name", unique: true });
+// const taskDb = new Datastore({
+//   filename: __dirname + "/taskDB",
+//   autoload: true
+// });
+// taskDb.ensureIndex({ fieldName: "task-name", unique: true });
+const taskDb = require("./taskModel");
 
 function validateTask(taskInfo) {
   const allowedFields = ["task-name", "due", "status", "instructions"];

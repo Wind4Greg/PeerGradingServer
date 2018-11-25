@@ -2,9 +2,10 @@
 //
 // Remove the file taskDB before running this example
 //
-const DataStore = require("nedb-promises");
-const db = new DataStore({ filename: __dirname + "/taskDB", autoload: true });
-db.ensureIndex({ fieldName: "task-name", unique: true });
+// const DataStore = require("nedb-promises");
+// const db = new DataStore({ filename: __dirname + "/taskDB", autoload: true });
+// db.ensureIndex({ fieldName: "task-name", unique: true });
+const db = require("./taskModel");
 const tasks = require("./tasks1.json");
 // We let NeDB create _id property for us.
 

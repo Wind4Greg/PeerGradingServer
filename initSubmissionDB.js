@@ -2,20 +2,25 @@
 //
 // Remove the file taskDB before running this example
 //
-const DataStore = require("nedb-promises");
-const db = new DataStore({ filename: __dirname + "/submissionDB", autoload: true });
-db.ensureIndex({ fieldName: "task-name", unique: false });
-db.ensureIndex({fieldName: "student-id", unique: false});
+// const DataStore = require("nedb-promises");
+// console.log("In init sub database");
+// const db = DataStore.create({
+//   filename: __dirname + "/submissionDB",
+//   autoload: true
+// });
+// db.ensureIndex({ fieldName: "task-name", unique: false });
+// db.ensureIndex({ fieldName: "student-id", unique: false });
+const db = require("./submissionModel");
+
 const submissions = require("./submissions1.json");
 
-// We let NeDB create _id property for us.
-
 function resetSubmissions() {
-  return db.remove({}, { multi: true })
+  return db
+    .remove({}, { multi: true })
     .then(function(numRemoved) {
-      // console.log(`Removed ${numRemoved} tasks`);
+      console.log(`Removed ${numRemoved} tasks`);
       let p = db.insert(submissions);
-      // console.log(p instanceof Promise);
+      console.log(p instanceof Promise);
       return p;
     })
     .catch(function(err) {

@@ -113,7 +113,25 @@ describe("Submission Routes", function() {
         .expect(404, done);
     });
   });
-  describe("Student Put /submissions", function() {
-    //TODO
+
+    describe("Student Put", function() {
+    it("updating a single submission HW1.3 for a single student, cw3337", function(done) {
+      request(app)
+        .put("/submissions/HW1.3/student/cw3337")
+        .set("Accept", "application/json")
+        .send({
+          "task-name": "HW1.3",
+          "student-id": "cw3337",
+          content: "It is used in `redirects`."
+        })
+        .expect("Content-Type", /json/)
+        .expect(function(res) {
+          console.log(
+            `Updated HW1.3 of for cw3337: ${JSON.stringify(res.body)}`
+          );
+          assert.equal(res.body["task-name"], "HW1.3");
+        })
+        .expect(200, done);
+    });
   });
 });

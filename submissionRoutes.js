@@ -7,76 +7,47 @@ const Datastore = require("nedb-promises");
 const router = express.Router();
 router.use(express.json());
 
-const submissionDb = new Datastore({
-  filename: __dirname + "/submissionDB",
+const submissionDb = require("./submissionModel");
+
+// We need the task database to validate submissions.
+const taskDb = new Datastore({
+  filename: __dirname + "/taskDB",
   autoload: true
 });
-submissionDb.ensureIndex({ fieldName: "task-name", unique: false });
-submissionDb.ensureIndex({fieldName: "student-id", unique: false});
-//taskDb.ensureIndex({ fieldName: "task-name", unique: true });
+taskDb.ensureIndex({ fieldName: "task-name", unique: true });
 
 function validateSubmission(subInfo) {
-  const allowedFields = ["task-name", "due", "status", "instructions"]; //Update
+  const allowedFields = ["task-name", "student-id", "content"];
   let error = false;
   let message = "";
-  // if (!taskInfo["task-name"]) {
-  //   // Required field
-  //   error = true;
-  //   message += "missing task-name \n";
-  // }
-  // if (!taskInfo.instructions) {
-  //   // Required field
-  //   error = true;
-  //   message += "missing instructions \n";
-  // }
-  // if (!taskInfo.status) {
-  //   // Required field
-  //   error = true;
-  //   message += "missing status \n";
-  // }
-
-  return [error, message];
+  return taskDb
+    .findOne({ "task-name": subInfo["task-name"] })
+    .then(function(task) {
+      if (task) {
+        // is the task open
+        if (task.status !== "open") {
+          error = true;
+          message += `Task ${task["task-name"]} is not open. \n`;
+        }
+        // More checks here
+        return [error, message];
+      } else {
+        error = true;
+        message += `Task ${subInfo["task-name"]} Not Found; \n`;
+        return [error, message];
+      }
+    })
+    .then(function(errMessage) {
+      let [error, message] = errMessage;
+      // Check student data base here
+      return [error, message];
+    })
+    .catch(function(err) {
+      error = true;
+      message += `Internal issue task database: ${err}`;
+      return [error, message];
+    });
 }
-
-// router.post("/", function(req, res) {
-//   let taskInfo = req.body; // This should be a JS Object
-//   let [error, message] = validateTask(taskInfo);
-//   if (error) {
-//     res.status(400).json({ error: message });
-//     return;
-//   }
-//   // TODO: Check for other required fields
-//   taskDb
-//     .find({ "task-name": taskInfo["task-name"] }) // task name already used?
-//     .then(function(docs) {
-//       // console.log(`docs: ${docs}`);
-//       if (docs.length > 0) {
-//         // console.log(`Task: ${taskInfo["task-name"]} already in DB`);
-//         res.status(400); // Bad request
-//         return { error: "task-name already used" };
-//       } else {
-//         // Not in DB so insert it
-//         // TODO quality check taskInfo for require fields and such
-//         return taskDb.insert(taskInfo).then(function(newDoc) {
-//           //console.log(`new doc: ${JSON.stringify(newDoc)}`);
-//           res.status(201); // Created
-//           return { ...newDoc };
-//         });
-//       }
-//     })
-//     .then(function(msg) {
-//       res.json(msg);
-//     })
-//     .catch(function(err) {
-//       // Really important for debugging too!
-//       console.log(`Something bad happened: ${err}`);
-//       res.json({
-//         registration: "failed",
-//         name: userInfo.name,
-//         reason: "internal error"
-//       });
-//     });
-// });
 
 // Teacher interface get submissions for a particular task from all students
 router.get("/:taskName", function(req, res) {
@@ -157,26 +128,33 @@ router.put("/:taskName/student/:studentID", function(req, res) {
   const taskName = req.params.taskName;
   const studentID = req.params.studentID;
   let submissionInfo = req.body;
-  let [error, message] = validateSubmission(submissionInfo);
-  if (error) {
-    res.status(400).json({ error: message });
-    return;
-  }
-  if (taskName !== taskInfo["task-name"]) {
-    res.status(400).json({ error: "task-name and path don't match" });
-    return;
-  }
-  // TODO: update this for "upsert", i.e., both update and insert.
-  submissionDb
-    .update({ "task-name": taskName }, taskInfo, { returnUpdatedDocs: true })
-    .then(function(doc) {
-      if (doc) {
-        // console.log(doc);
-        res.status(200).json(doc);
-      } else {
-        res.status(404).json({ error: "Task not found" });
-      }
-    });
+  submissionInfo["task-name"] = taskName;
+  submissionInfo["student-id"] = studentID;
+  submissionInfo.submitted = (new Date()).toJSON();
+
+  validateSubmission(submissionInfo).then(function(errMessage) {
+    let [error, message] = errMessage;
+    if (error) {
+      res.status(400).json({ error: message });
+      return;
+    }
+    if (taskName !== submissionInfo["task-name"]) {
+      res.status(400).json({ error: "task-name and path don't match" });
+      return;
+    }
+    // Uses an "upsert", i.e., allows both update and insert.
+    submissionDb
+      .update({ "task-name": taskName, "student-id": studentID }, submissionInfo,
+        { returnUpdatedDocs: true, upsert: true })
+      .then(function(doc) {
+        if (doc) {
+          console.log(doc);
+          res.status(200).json(doc);
+        } else {
+          res.status(404).json({ error: "Task not found" });
+        }
+      });
+  });
 });
 
 module.exports = router;
