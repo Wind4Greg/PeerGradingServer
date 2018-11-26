@@ -157,7 +157,7 @@ router.put("/:taskName/student/:studentID", function(req, res) {
       )
       .then(function(doc) {
         if (doc) {
-          console.log(doc);
+          // console.log(doc);
           res.status(200).json(doc);
         } else {
           res.status(404).json({ error: "Task not found" });

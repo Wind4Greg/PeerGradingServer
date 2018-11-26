@@ -26,9 +26,9 @@ describe("Submission Routes", function() {
         .set("Accept", "application/json")
         // .expect("Content-Type", /json/)
         .expect(function(res) {
-          console.log(
-            `Number of HW1.1 submissions: ${res.body.submissions.length} \n`
-          );
+          // console.log(
+          //   `Number of HW1.1 submissions: ${res.body.submissions.length} \n`
+          // );
           assert.lengthOf(
             res.body.submissions,
             5,
@@ -44,7 +44,7 @@ describe("Submission Routes", function() {
         .set("Accept", "application/json")
         // .expect("Content-Type", /json/)
         .expect(function(res) {
-          console.log(`Number of HW1.1 subs: ${res.body.submissions.length}`);
+          // console.log(`Number of HW1.1 subs: ${res.body.submissions.length}`);
           assert.lengthOf(
             res.body.submissions,
             0,
@@ -62,9 +62,9 @@ describe("Submission Routes", function() {
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
         .expect(function(res) {
-          console.log(
-            `# of subs for cw3337: ${res.body.submissions.length} \n`
-          );
+          // console.log(
+          //   `# of subs for cw3337: ${res.body.submissions.length} \n`
+          // );
           assert.lengthOf(
             res.body.submissions,
             4,
@@ -80,7 +80,7 @@ describe("Submission Routes", function() {
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
         .expect(function(res) {
-          console.log(`# of subs for xyz337: ${res.body.submissions.length}`);
+          // console.log(`# of subs for xyz337: ${res.body.submissions.length}`);
           assert.lengthOf(
             res.body.submissions,
             0,
@@ -96,9 +96,9 @@ describe("Submission Routes", function() {
         .set("Accept", "application/json")
         .expect("Content-Type", /json/)
         .expect(function(res) {
-          console.log(
-            `HW1.1 of for cw3337: ${JSON.stringify(res.body.submission)}\n`
-          );
+          // console.log(
+          //   `HW1.1 of for cw3337: ${JSON.stringify(res.body.submission)}\n`
+          // );
           assert.equal(res.body.submission["task-name"], "HW1.1");
         })
         .expect(200, done);
@@ -187,9 +187,9 @@ describe("Submission Routes", function() {
         })
         .expect("Content-Type", /json/)
         .expect(function(res) {
-          console.log(
-            `Submit HW1.3 of for xyz337: ${JSON.stringify(res.body)}`
-          );
+          // console.log(
+          //   `Submit HW1.3 of for xyz337: ${JSON.stringify(res.body)}`
+          // );
           assert.exists(res.body.error);
         })
         .expect(400, done);

@@ -8,7 +8,7 @@ const userRoutes = require("../routes/userRoutes");
 
 app.use("/users", userRoutes);
 
-describe("taskRoutes", function() {
+describe("User Routes", function() {
   before(function(done) {
     // Note use of done to deal with async tasks.
     let q = resetUsers();
