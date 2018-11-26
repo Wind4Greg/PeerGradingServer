@@ -94,13 +94,7 @@
       "In the following HTML snippet where would you insert\r\nthe `<title>` element and what purpose does it serve?\r\n In the `<head>`.\r\n"
   },
 
-  {
-    "task-name": "HW1.3",
-    "submitted": "2018-12-02T00:00:00.000Z",
-    "student-id": "bl6738",
-    "content":
-      "What is the HTTP *Location* header used for?\r\n Its used in `redirects`."
-  },
+
   {
     "task-name": "HW1.5",
     "submitted": "2018-12-02T00:00:00.000Z",

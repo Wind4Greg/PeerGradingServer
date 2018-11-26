@@ -3,13 +3,14 @@
  */
 
 const express = require("express");
-const Datastore = require("nedb-promises");
 const router = express.Router();
 router.use(express.json());
 
 const submissionDb = require("../models/submissionModel");
 // We need the task database to validate submissions.
 const taskDb = require("../models/taskModel");
+// We need the user database to validate submissions.
+const userDb = require("../models/userModel");
 
 function validateSubmission(subInfo) {
   const allowedFields = ["task-name", "student-id", "content"];
@@ -24,7 +25,7 @@ function validateSubmission(subInfo) {
           error = true;
           message += `Task ${task["task-name"]} is not open. \n`;
         }
-        // More checks here
+        // More synchronous checks on submission here if desired
         return [error, message];
       } else {
         error = true;
@@ -35,7 +36,17 @@ function validateSubmission(subInfo) {
     .then(function(errMessage) {
       let [error, message] = errMessage;
       // Check student data base here
-      return [error, message];
+      return userDb.findOne({"student-id": subInfo["student-id"]})
+        .then(function(user) {
+          if (user) {
+            return [error, message];
+          } else {
+            error = true;
+            message += `Student ${subInfo["student-id"]} Not Found.`;
+            return [error, message];
+          }
+        })
+
     })
     .catch(function(err) {
       error = true;
