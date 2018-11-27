@@ -3,7 +3,6 @@
  */
 
 const express = require("express");
-// const Datastore = require("nedb-promises");
 const router = express.Router();
 router.use(express.json());
 
@@ -51,7 +50,6 @@ router.post("/", function(req, res) {
         return { error: "task-name already used" };
       } else {
         // Not in DB so insert it
-        // TODO quality check taskInfo for require fields and such
         return taskDb.insert(taskInfo).then(function(newDoc) {
           //console.log(`new doc: ${JSON.stringify(newDoc)}`);
           res.status(201); // Created
