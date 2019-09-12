@@ -2,11 +2,7 @@
 const request = require("supertest");
 const assert = require("chai").assert;
 const resetSubmissions = require("../testHelpers/initSubmissionDB");
-const express = require("express");
-const app = express();
-const submissionRoutes = require("../routes/submissionRoutes");
-
-app.use("/submissions", submissionRoutes);
+const app = require("../prServer");
 
 describe("Submission Routes", function() {
   before(function(done) {

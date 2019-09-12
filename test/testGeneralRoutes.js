@@ -2,11 +2,8 @@
 const request = require("supertest");
 const assert = require("chai").assert;
 const resetUsers = require("../testHelpers/initUserDB");
-const express = require("express");
-const app = express();
-const generalRoutes = require("../routes/generalRoutes");
+const app = require("../prServer");
 
-app.use("/", generalRoutes);
 
 describe("General Routes", function() {
   before(function(done) {

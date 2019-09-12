@@ -2,11 +2,7 @@
 const request = require("supertest");
 const assert = require("chai").assert;
 const resetTasks = require("../testHelpers/initTaskDB");
-const express = require("express");
-const app = express();
-const taskRoutes = require("../routes/taskRoutes");
-
-app.use("/tasks", taskRoutes);
+const app = require("../prServer");
 
 describe("taskRoutes", function() {
   before(function(done) {
