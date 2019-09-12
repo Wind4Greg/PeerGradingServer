@@ -37,5 +37,12 @@ Scope restrictions to make a minimum viable project (MVP):
 
 See [Design Project Slides](https://www.grotto-networking.com/WebSystems/files/lectures/Misc/DesignProject1.html) for a bit more information.
 
+## Next Steps
+
+1. Add login and logout functionality
+2. Add role checks into API
+3. Images in Markdown submissions
+    1. How to store?
+    2. Uploading images?
 
 
