@@ -2,11 +2,7 @@
 const request = require("supertest");
 const assert = require("chai").assert;
 const resetUsers = require("../testHelpers/initUserDB");
-const express = require("express");
-const app = express();
-const userRoutes = require("../routes/userRoutes");
-
-app.use("/users", userRoutes);
+const app = require("../prServer");
 
 describe("User Routes", function() {
   before(function(done) {
