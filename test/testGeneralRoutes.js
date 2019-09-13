@@ -2,11 +2,15 @@
 const request = require("supertest");
 const assert = require("chai").assert;
 const resetUsers = require("../testHelpers/initUserDB");
+const cookie = require("cookie");
 const app = require("../prServer");
+const testUsers = require("../testHelpers/users1.json"); // Users with passwords
 
 
 describe("General Routes", function() {
   before(function(done) {
+    console.log("Test user:");
+    console.log(testUsers[0]);
     // Note use of done to deal with async tasks.
     let q = resetUsers();
     // console.log(`q is a promise? ${q instanceof Promise}`);
@@ -17,21 +21,35 @@ describe("General Routes", function() {
   });
 
   describe("User login /login", function() {
+
+    const agent = request.agent(app);  // Used to remember cookies across multiple calls
+
     it("Good Login", function(done) {
-      request(app)
+      agent
         .put("/login")
         .set("Accept", "application/json")
         .send({
-          email: "seersucker1910@outlook.com",
-          password: "R3K[Iy0+"
+          email: testUsers[0].email,
+          password: testUsers[0].password
         })
         .expect("Content-Type", /json/)
         .expect(function(res) {
           console.log(`login result: ${JSON.stringify(res.body)}`);
-          //assert.equal(res.body["task-name"], "HW1.3");
+          console.log(`cookies: ${JSON.stringify(res.headers['set-cookie'])}`);
+          console.log(cookie.parse(res.headers['set-cookie'][0]));
         })
         .expect(200, done);
     });
+
+    it("Logout", function(done){
+      agent
+        .get("/logout")
+        .expect(function(res){
+          console.log(`cookies: ${JSON.stringify(res.headers['set-cookie'])}`);
+          console.log(cookie.parse(res.headers['set-cookie'][0]));
+        })
+        .expect(200, done);
+    })
 
     it("Bad Password", function(done) {
       request(app)

@@ -7,30 +7,25 @@
 */
 
 const db = require("../models/userModel");
-const users = require("./students1.json");
+const users = require("./users1.json");
 const pbcrypt = require("../util/pbcryptjs");
 
-function resetUsers() {
-  return db
-    .remove({}, { multi: true })
-    .then(function(numRemoved) {
-      // console.log(`Removed ${numRemoved} users \n`);
-      let pUsers = users.map(function(u) {
-        return pbcrypt.saltHash(u.password, 5).then(function(hash) {
-          u.password = hash;
-          return u;
-        });
-      });
-      Promise.all(pUsers).then(function(hashedUsers) {
-        let p = db.insert(hashedUsers); // We let NeDB create _id property for us.
-        // console.log(hashedUsers);
-        return p;
-      });
-    })
-    .catch(function(err) {
-      console.log(`Some kind of problem: ${err}`);
-      return err;
-    });
+async function resetUsers() {
+  try {
+    let numRemoved = await db.remove({}, {multi: true});
+    // console.log(`Removed ${numRemoved} users \n`);
+
+    for (let user of users) {
+      let hash = await pbcrypt.saltHash(user.password, 5);
+      let hashedUser = Object.assign({}, user, {password: hash}); // Make a copy for safety.
+      // console.log(hashedUser);
+      let newdoc = await db.insert(hashedUser);
+      // console.log(newdoc);
+    }
+  } catch (err) {
+    console.log(`Some kind of problem: ${err}`);
+    return err;
+  }
 }
 
 module.exports = resetUsers;

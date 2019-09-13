@@ -1,5 +1,6 @@
 /*
-    Assignment/peer review server
+    Assignment/peer review server run file.
+    Pulled this code out of prServer.js to allow for easier testing.
  */
 const app = require("./prServer");
 
