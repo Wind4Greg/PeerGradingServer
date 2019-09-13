@@ -56,13 +56,12 @@ describe("General Routes", function() {
         .put("/login")
         .set("Accept", "application/json")
         .send({
-          email: "seersucker1910@outlook.com",
-          password: "!R3K[Iy0+"
+          email: testUsers[1].email,
+          password: "wrong" + testUsers[1].password
         })
         .expect("Content-Type", /json/)
         .expect(function(res) {
           console.log(`login result: ${JSON.stringify(res.body)}`);
-          //assert.equal(res.body["task-name"], "HW1.3");
         })
         .expect(401, done);
     });
@@ -73,13 +72,12 @@ describe("General Routes", function() {
         .put("/login")
         .set("Accept", "application/json")
         .send({
-          email: "leersucker1910@outlook.com", // Not a user email
-          password: '"R3K[Iy0+"'
+          email: "wrong" + testUsers[2].email, // Not a user email
+          password: testUsers[2].password
         })
         .expect("Content-Type", /json/)
         .expect(function(res) {
           console.log(`login result: ${JSON.stringify(res.body)}`);
-          //assert.equal(res.body["task-name"], "HW1.3");
         })
         .expect(401, done);
     });
