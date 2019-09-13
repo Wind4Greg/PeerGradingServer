@@ -46,7 +46,7 @@ describe("User Routes", function () {
     });
   })
 
-  describe("Student Access", function () {
+  describe("No Student Access", function () {
     const agent = request.agent(app);  // Used to remember cookies across multiple calls
     it("Student Login", function (done) {
       agent
@@ -64,7 +64,7 @@ describe("User Routes", function () {
         .expect(200, done);
     });
 
-    it("Student Getting all users with json", function (done) {
+    it("Student can't get users", function (done) {
       agent
         .get("/users")
         .set("Accept", "application/json")
@@ -77,9 +77,9 @@ describe("User Routes", function () {
   })
 
 
-  describe("Guest Access", function () {
+  describe("No Guest Access", function () {
     const agent = request.agent(app);  // Used to remember cookies across multiple calls
-    it("Guest Getting all users with json", function (done) {
+    it("Guest can't get users", function (done) {
       agent
         .get("/users")
         .set("Accept", "application/json")
